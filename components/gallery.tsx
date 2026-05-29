@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 const galleryImages = [
-  { src: "/Place/Outside.jpg", alt: "Outside Area" },
+  { src: "/public/Place/Outside.jpg", alt: "Outside Area" },
   { src: "/Place/Counter.jpg", alt: "Counter Area" },
   { src: "/Place/inside.jpg", alt: "Restaurant Interior" },
 ]
