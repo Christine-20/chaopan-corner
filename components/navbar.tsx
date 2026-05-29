@@ -40,7 +40,7 @@ export function Navbar() {
           <Link href="#home" className="flex items-center gap-2">
             <div className="relative w-12 h-12">
               <Image
-                src="/Official-Logo.jpeg"
+                src="/images/Official-Logo.jpeg"
                 alt="Chaopan Corner"
                 fill
                 className="object-contain"
