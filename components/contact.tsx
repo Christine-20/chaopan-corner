@@ -24,21 +24,29 @@ export function Contact() {
           {/* Contact Info */}
           <div className="space-y-8">
             {/* Location */}
-            <div className="flex gap-4">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-serif text-xl font-bold text-foreground mb-1">
-                  Location
-                </h3>
-                <p className="text-muted-foreground">
-                  Jaen, Nueva Ecija
-                  <br />
-                  Near Palawan
-                </p>
-              </div>
-            </div>
+<div className="flex gap-4">
+  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+    <MapPin className="w-6 h-6 text-primary" />
+  </div>
+  <div>
+    <h3 className="font-serif text-xl font-bold text-foreground mb-1">
+      Location
+    </h3>
+
+    <a
+      href="https://maps.app.goo.gl/FNBkVdo138udRHk57"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary hover:underline"
+    >
+      Open Chaopan Corner in Google Maps
+    </a>
+
+    <p className="text-muted-foreground mt-2">
+      Jaen, Nueva Ecija, Philippines
+    </p>
+  </div>
+</div>
 
             {/* Phone */}
             <div className="flex gap-4">
@@ -91,30 +99,36 @@ export function Contact() {
           {/* Map Placeholder */}
           <div className="relative">
             <div className="aspect-square md:aspect-auto md:h-full min-h-[300px] rounded-lg overflow-hidden border border-border bg-muted">
-              {/* Map placeholder */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                    <MapPin className="w-10 h-10 text-primary" />
-                  </div>
-                  <p className="text-foreground font-semibold">Jaen, Nueva Ecija</p>
-                  <p className="text-muted-foreground text-sm">Near Palawan</p>
-                  <Button
-                    asChild
-                    variant="link"
-                    className="text-primary mt-2"
-                  >
-                    <a
-                      href="https://maps.google.com/?q=Jaen,Nueva+Ecija"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View on Google Maps →
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </div>
+  <div className="absolute inset-0 flex items-center justify-center">
+    <div className="text-center">
+      <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+        <MapPin className="w-10 h-10 text-primary" />
+      </div>
+
+      <p className="text-foreground font-semibold">
+        Chaopan Corner
+      </p>
+
+      <p className="text-muted-foreground text-sm">
+        Jaen, Nueva Ecija, Philippines
+      </p>
+
+      <Button
+        asChild
+        variant="link"
+        className="text-primary mt-2"
+      >
+        <a
+          href="https://maps.app.goo.gl/FNBkVdo138udRHk57"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open in Google Maps →
+        </a>
+      </Button>
+    </div>
+  </div>
+</div>
 
             {/* Social Links */}
             <div className="flex justify-center gap-4 mt-6">
