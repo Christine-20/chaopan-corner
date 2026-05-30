@@ -22,6 +22,7 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
+
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -29,14 +30,13 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? "bg-background/95 backdrop-blur-md border-b border-border"
           : "bg-transparent"
       }`}
     >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link href="#home" className="flex items-center gap-2">
             <div className="relative w-12 h-12">
               <Image
@@ -51,7 +51,6 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -64,7 +63,6 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Call Now Button */}
           <div className="hidden md:flex items-center gap-4">
             <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
               <a href="tel:09289623913">
@@ -74,35 +72,30 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-foreground"
+            className="md:hidden text-foreground z-[10000]"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-border">
-            <div className="flex flex-col gap-4 pt-4">
+          <div className="md:hidden fixed top-[80px] left-0 right-0 bottom-0 bg-background z-[9999] px-6 py-8 border-t border-border">
+            <div className="flex flex-col gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-foreground/80 hover:text-primary transition-colors text-sm uppercase tracking-wider"
+                  className="text-foreground hover:text-primary transition-colors text-2xl uppercase tracking-wider"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+
+              <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-4">
                 <a href="tel:09289623913">
                   <Phone className="w-4 h-4 mr-2" />
                   Call Now
