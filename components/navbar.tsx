@@ -91,7 +91,7 @@ export function Navbar() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed top-[80px] left-0 right-0 bottom-0 z-[9999] bg-black/90 backdrop-blur-2xl px-6 py-8 border-t border-primary/20">
+          <div className="md:hidden fixed top-[72px] left-0 right-0 bottom-0 z-[9999] bg-black px-6 py-8 border-t border-primary/20 overflow-y-auto">
             <div className="flex justify-center mb-8">
               <Image
                 src="/images/Official-Logo.jpeg"
