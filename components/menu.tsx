@@ -23,7 +23,7 @@ const menuItems = [
   },
   {
     name: "Chao Pan w/ Pork Chop",
-    price: 109,
+    price: 129,
     description:
       "Hearty chao pan topped with succulent crispy breaded pork chop. Big sa busog guaranteed!",
     image: "/images/pork-chop.png",
