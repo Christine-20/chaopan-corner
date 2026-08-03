@@ -7,7 +7,7 @@ type Category =
   | "All"
   | "Signature Meals"
   | "Student Meals"
-  | "Snacks"
+  | "Sides"
   | "Drinks"
 
 type DrinkSize = {
@@ -29,7 +29,7 @@ const categories: Category[] = [
   "All",
   "Signature Meals",
   "Student Meals",
-  "Snacks",
+  "Sides",
   "Drinks",
 ]
 
@@ -47,6 +47,14 @@ const menuItems: MenuItem[] = [
     description:
       "Signature Chaopan fried rice served with three Japanese-style siomai.",
     image: "/images/siomai.png",
+    category: "Signature Meals",
+  },
+  {
+    name: "Chao Pan w/ Big Pork Siomai",
+    price: 100,
+    description:
+      "Signature Chaopan fried rice served with three large pork siomai.",
+    image: "/images/chaopan-siomai.png",
     category: "Signature Meals",
   },
   {
@@ -85,8 +93,16 @@ const menuItems: MenuItem[] = [
     name: "Chaopan Liempo",
     price: 129,
     description:
-      "Crispy grilled pork belly served with Chaopan fried rice and dipping sauce.",
+      "Grilled pork belly served with Chaopan fried rice and dipping sauce.",
     image: "/images/chaopan-liempo.png",
+    category: "Signature Meals",
+  },
+  {
+    name: "Chaopan Fish Fillet",
+    price: 129,
+    description:
+      "Signature Chaopan fried rice served with three crispy breaded fish fillets.",
+    image: "/images/chaopan-fish-fillet.png",
     category: "Signature Meals",
   },
   {
@@ -97,6 +113,7 @@ const menuItems: MenuItem[] = [
     image: "/images/chicken-pastil.png",
     category: "Signature Meals",
   },
+
   {
     name: "Student Meal Chao Pan w/ Pork Siomai",
     price: 60,
@@ -113,14 +130,32 @@ const menuItems: MenuItem[] = [
     image: "/images/student-shanghai.png",
     category: "Student Meals",
   },
+
   {
     name: "Pansit Canton",
     price: 30,
     description:
       "Classic Filipino stir-fried noodles with vegetables and savory seasoning.",
     image: "/images/pansit-canton.png",
-    category: "Snacks",
+    category: "Sides",
   },
+  {
+    name: "Fries",
+    price: 40,
+    description:
+      "Crispy golden French fries, freshly cooked and lightly seasoned.",
+    image: "/images/fries.png",
+    category: "Sides",
+  },
+  {
+    name: "Kimchi",
+    price: 25,
+    description:
+      "Spicy and tangy kimchi that pairs well with Chaopan meals.",
+    image: "/images/kimchi.png",
+    category: "Sides",
+  },
+
   {
     name: "Coffee",
     price: 15,
@@ -236,9 +271,9 @@ export function Menu() {
           <div className="mx-auto mt-6 h-1 w-24 bg-primary" />
 
           <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">
-            Explore our signature rice meals, affordable student
-            combos, snacks, coffee, and refreshing fruit sodas with
-            flavored boba.
+            Explore our signature Chaopan meals, affordable student
+            meals, side dishes, coffee, and refreshing fruit sodas
+            with flavored boba.
           </p>
         </div>
 
