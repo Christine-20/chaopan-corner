@@ -23,19 +23,19 @@ const galleryImages = [
   },
   {
     src: "/images/mango-soda.png",
-    alt: "Mango Milk Tea",
+    alt: "Mango Fruit Soda",
   },
   {
     src: "/images/strawberry-soda.png",
-    alt: "Strawberry Milk Tea",
+    alt: "Strawberry Fruit Soda",
   },
   {
     src: "/images/blueberry-soda.png",
-    alt: "Blueberry Milk Tea",
+    alt: "Blueberry Fruit Soda",
   },
   {
     src: "/images/green-apple-soda.png",
-    alt: "Green Apple Milk Tea",
+    alt: "Green Apple Fruit Soda",
   },
 ]
 
