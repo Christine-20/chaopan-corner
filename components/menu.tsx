@@ -91,7 +91,7 @@ const menuItems: MenuItem[] = [
   },
   {
     name: "Chaopan Liempo",
-    price: 129,
+    price: 139,
     description:
       "Grilled pork belly served with Chaopan fried rice and dipping sauce.",
     image: "/images/chaopan-liempo.png",
