@@ -7,6 +7,7 @@ type Category =
   | "All"
   | "Signature Meals"
   | "Student Meals"
+  | "Snacks"
   | "Drinks"
 
 type DrinkSize = {
@@ -28,6 +29,7 @@ const categories: Category[] = [
   "All",
   "Signature Meals",
   "Student Meals",
+  "Snacks",
   "Drinks",
 ]
 
@@ -117,7 +119,7 @@ const menuItems: MenuItem[] = [
     description:
       "Classic Filipino stir-fried noodles with vegetables and savory seasoning.",
     image: "/images/pansit-canton.png",
-    category: "Signature Meals",
+    category: "Snacks",
   },
   {
     name: "Coffee",
@@ -159,6 +161,46 @@ const menuItems: MenuItem[] = [
     sizes: fruitSodaSizes,
   },
 ]
+
+function getDrinkBackground(name: string) {
+  if (name.includes("Blueberry")) {
+    return {
+      gradient:
+        "bg-gradient-to-br from-blue-300/80 via-violet-200/70 to-slate-100",
+      glow: "bg-blue-500/30",
+    }
+  }
+
+  if (name.includes("Mango")) {
+    return {
+      gradient:
+        "bg-gradient-to-br from-yellow-300/80 via-orange-200/70 to-amber-50",
+      glow: "bg-orange-500/30",
+    }
+  }
+
+  if (name.includes("Strawberry")) {
+    return {
+      gradient:
+        "bg-gradient-to-br from-pink-300/80 via-rose-200/70 to-red-50",
+      glow: "bg-pink-500/30",
+    }
+  }
+
+  if (name.includes("Green Apple")) {
+    return {
+      gradient:
+        "bg-gradient-to-br from-lime-300/80 via-green-200/70 to-emerald-50",
+      glow: "bg-lime-500/30",
+    }
+  }
+
+  return {
+    gradient:
+      "bg-gradient-to-br from-amber-300/80 via-orange-200/70 to-stone-100",
+    glow: "bg-amber-500/30",
+  }
+}
 
 export function Menu() {
   const [activeCategory, setActiveCategory] =
@@ -225,6 +267,7 @@ export function Menu() {
           {visibleItems.map((item) => {
             const hasSizes = Boolean(item.sizes)
             const isDrink = item.category === "Drinks"
+            const drinkBackground = getDrinkBackground(item.name)
 
             return (
               <article
@@ -234,12 +277,32 @@ export function Menu() {
                 <div
                   className={`relative overflow-hidden ${
                     hasSizes
-                      ? "h-72 bg-white"
+                      ? "h-72"
                       : isDrink
-                        ? "h-64 bg-white"
+                        ? "h-64"
                         : "h-64 bg-muted"
                   }`}
                 >
+                  {isDrink && (
+                    <>
+                      <div
+                        className={`absolute inset-0 ${drinkBackground.gradient}`}
+                      />
+
+                      <div
+                        className={`absolute -left-10 top-8 h-44 w-44 rounded-full ${drinkBackground.glow} blur-3xl`}
+                      />
+
+                      <div
+                        className={`absolute -bottom-12 right-0 h-52 w-52 rounded-full ${drinkBackground.glow} blur-3xl`}
+                      />
+
+                      <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]" />
+
+                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/10 to-transparent" />
+                    </>
+                  )}
+
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -247,25 +310,25 @@ export function Menu() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className={
                       isDrink
-                        ? "object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                        ? "relative z-10 object-contain p-3 drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
                         : "object-cover transition-transform duration-500 group-hover:scale-105"
                     }
                   />
 
                   {typeof item.price === "number" && (
-                    <div className="absolute right-4 top-4 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground shadow-lg">
+                    <div className="absolute right-4 top-4 z-20 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground shadow-lg">
                       ₱{item.price}
                     </div>
                   )}
 
                   {item.sizes && (
-                    <div className="absolute right-4 top-4 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground shadow-lg">
+                    <div className="absolute right-4 top-4 z-20 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground shadow-lg">
                       From ₱{item.sizes[0].price}
                     </div>
                   )}
 
                   {item.badge && (
-                    <div className="absolute left-4 top-4 rounded-full border border-primary/40 bg-background/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary backdrop-blur">
+                    <div className="absolute left-4 top-4 z-20 rounded-full border border-primary/40 bg-background/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary backdrop-blur">
                       {item.badge}
                     </div>
                   )}
