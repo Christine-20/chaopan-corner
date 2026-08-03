@@ -7,7 +7,6 @@ type Category =
   | "All"
   | "Signature Meals"
   | "Student Meals"
-  | "Snacks"
   | "Drinks"
 
 type DrinkSize = {
@@ -29,11 +28,10 @@ const categories: Category[] = [
   "All",
   "Signature Meals",
   "Student Meals",
-  "Snacks",
   "Drinks",
 ]
 
-const milkTeaSizes: DrinkSize[] = [
+const fruitSodaSizes: DrinkSize[] = [
   { size: "8oz", price: 25 },
   { size: "12oz", price: 35 },
   { size: "16oz", price: 45 },
@@ -96,7 +94,6 @@ const menuItems: MenuItem[] = [
       "Savory shredded chicken pastil in banana leaf served with steamed rice.",
     image: "/images/chicken-pastil.png",
     category: "Signature Meals",
-  
   },
   {
     name: "Student Meal Chao Pan w/ Pork Siomai",
@@ -120,8 +117,7 @@ const menuItems: MenuItem[] = [
     description:
       "Classic Filipino stir-fried noodles with vegetables and savory seasoning.",
     image: "/images/pansit-canton.png",
-    category: "Snacks",
-    
+    category: "Signature Meals",
   },
   {
     name: "Coffee",
@@ -131,36 +127,36 @@ const menuItems: MenuItem[] = [
     category: "Drinks",
   },
   {
-    name: "Blueberry Milk Tea",
+    name: "Blueberry Fruit Soda",
     description:
-      "Creamy blueberry milk tea served cold. Choose your preferred size.",
-    image: "/images/blueberry-milk-tea.png",
+      "Refreshing blueberry fruit soda served cold with blueberry-flavored boba. Choose your preferred size.",
+    image: "/images/blueberry-soda.png",
     category: "Drinks",
-    sizes: milkTeaSizes,
+    sizes: fruitSodaSizes,
   },
   {
-    name: "Mango Milk Tea",
+    name: "Mango Fruit Soda",
     description:
-      "Refreshing creamy mango milk tea served cold. Choose your preferred size.",
-    image: "/images/mango-milk-tea.png",
+      "Refreshing mango fruit soda served cold with mango-flavored boba. Choose your preferred size.",
+    image: "/images/mango-soda.png",
     category: "Drinks",
-    sizes: milkTeaSizes,
+    sizes: fruitSodaSizes,
   },
   {
-    name: "Strawberry Milk Tea",
+    name: "Strawberry Fruit Soda",
     description:
-      "Sweet and creamy strawberry milk tea served cold. Choose your preferred size.",
-    image: "/images/strawberry-milk-tea.png",
+      "Refreshing strawberry fruit soda served cold with strawberry-flavored boba. Choose your preferred size.",
+    image: "/images/strawberry-soda.png",
     category: "Drinks",
-    sizes: milkTeaSizes,
+    sizes: fruitSodaSizes,
   },
   {
-    name: "Green Apple Milk Tea",
+    name: "Green Apple Fruit Soda",
     description:
-      "Refreshing green apple milk tea served cold. Choose your preferred size.",
-    image: "/images/green-apple-milk-tea.png",
+      "Refreshing green apple fruit soda served cold with green apple-flavored boba. Choose your preferred size.",
+    image: "/images/green-apple-soda.png",
     category: "Drinks",
-    sizes: milkTeaSizes,
+    sizes: fruitSodaSizes,
   },
 ]
 
@@ -183,11 +179,9 @@ export function Menu() {
       id="menu"
       className="relative bg-background py-24"
     >
-      {/* Background texture */}
       <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCI+CjxyZWN0IHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzAwMCIvPgo8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIxIiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPg==')]" />
 
       <div className="container relative z-10 mx-auto px-4">
-        {/* Section heading */}
         <div className="mb-10 text-center">
           <span className="text-sm uppercase tracking-[0.3em] text-primary">
             Our Specialties
@@ -201,12 +195,11 @@ export function Menu() {
 
           <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">
             Explore our signature rice meals, affordable student
-            combos, snacks, coffee, and milk tea available in several
-            sizes.
+            combos, snacks, coffee, and refreshing fruit sodas with
+            flavored boba.
           </p>
         </div>
 
-        {/* Category filters */}
         <div className="mx-auto mb-12 flex max-w-5xl flex-wrap justify-center gap-3">
           {categories.map((category) => {
             const isActive = activeCategory === category
@@ -228,7 +221,6 @@ export function Menu() {
           })}
         </div>
 
-        {/* Menu grid */}
         <div className="mx-auto grid max-w-7xl items-start gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {visibleItems.map((item) => {
             const hasSizes = Boolean(item.sizes)
@@ -239,7 +231,6 @@ export function Menu() {
                 key={item.name}
                 className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
               >
-                {/* Image area */}
                 <div
                   className={`relative overflow-hidden ${
                     hasSizes
@@ -280,7 +271,6 @@ export function Menu() {
                   )}
                 </div>
 
-                {/* Card content */}
                 <div className="p-6">
                   <p className="text-xs uppercase tracking-[0.2em] text-primary">
                     {item.category}

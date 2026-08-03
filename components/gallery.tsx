@@ -22,19 +22,19 @@ const galleryImages = [
     alt: "Chaopan Hungarian Sausage",
   },
   {
-    src: "/images/mango-milk-tea.png",
+    src: "/images/mango-soda.png",
     alt: "Mango Milk Tea",
   },
   {
-    src: "/images/strawberry-milk-tea.png",
+    src: "/images/strawberry-soda.png",
     alt: "Strawberry Milk Tea",
   },
   {
-    src: "/images/blueberry-milk-tea.png",
+    src: "/images/blueberry-soda.png",
     alt: "Blueberry Milk Tea",
   },
   {
-    src: "/images/green-apple-milk-tea.png",
+    src: "/images/green-apple-soda.png",
     alt: "Green Apple Milk Tea",
   },
 ]
