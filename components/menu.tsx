@@ -10,12 +10,18 @@ type Category =
   | "Snacks"
   | "Drinks"
 
+type DrinkSize = {
+  size: string
+  price: number
+}
+
 type MenuItem = {
   name: string
-  price: number
   description: string
   image: string
   category: Exclude<Category, "All">
+  price?: number
+  sizes?: DrinkSize[]
   badge?: string
 }
 
@@ -25,6 +31,13 @@ const categories: Category[] = [
   "Student Meals",
   "Snacks",
   "Drinks",
+]
+
+const milkTeaSizes: DrinkSize[] = [
+  { size: "8oz", price: 25 },
+  { size: "12oz", price: 35 },
+  { size: "16oz", price: 45 },
+  { size: "22oz", price: 55 },
 ]
 
 const menuItems: MenuItem[] = [
@@ -67,7 +80,6 @@ const menuItems: MenuItem[] = [
       "Signature Chaopan fried rice paired with a juicy Hungarian sausage.",
     image: "/images/chaopan-hungarian.png",
     category: "Signature Meals",
-    badge: "New",
   },
   {
     name: "Chaopan Liempo",
@@ -76,7 +88,6 @@ const menuItems: MenuItem[] = [
       "Crispy grilled pork belly served with Chaopan fried rice and dipping sauce.",
     image: "/images/chaopan-liempo.png",
     category: "Signature Meals",
-    badge: "New",
   },
   {
     name: "Chicken Pastil",
@@ -85,7 +96,7 @@ const menuItems: MenuItem[] = [
       "Savory shredded chicken pastil in banana leaf served with steamed rice.",
     image: "/images/chicken-pastil.png",
     category: "Signature Meals",
-    badge: "New",
+  
   },
   {
     name: "Student Meal Chao Pan w/ Pork Siomai",
@@ -110,51 +121,46 @@ const menuItems: MenuItem[] = [
       "Classic Filipino stir-fried noodles with vegetables and savory seasoning.",
     image: "/images/pansit-canton.png",
     category: "Snacks",
-    badge: "New",
+    
   },
   {
     name: "Coffee",
     price: 15,
-    description:
-      "A warm and comforting cup of coffee.",
+    description: "A warm and comforting cup of coffee.",
     image: "/images/coffee.png",
     category: "Drinks",
   },
   {
     name: "Blueberry Milk Tea",
-    price: 89,
     description:
-      "Creamy blueberry milk tea served cold with chewy pearls.",
+      "Creamy blueberry milk tea served cold. Choose your preferred size.",
     image: "/images/blueberry-milk-tea.png",
     category: "Drinks",
-    badge: "New",
+    sizes: milkTeaSizes,
   },
   {
     name: "Mango Milk Tea",
-    price: 89,
     description:
-      "Refreshing creamy mango milk tea served with chewy pearls.",
+      "Refreshing creamy mango milk tea served cold. Choose your preferred size.",
     image: "/images/mango-milk-tea.png",
     category: "Drinks",
-    badge: "New",
+    sizes: milkTeaSizes,
   },
   {
     name: "Strawberry Milk Tea",
-    price: 89,
     description:
-      "Sweet and creamy strawberry milk tea served with chewy pearls.",
+      "Sweet and creamy strawberry milk tea served cold. Choose your preferred size.",
     image: "/images/strawberry-milk-tea.png",
     category: "Drinks",
-    badge: "New",
+    sizes: milkTeaSizes,
   },
   {
     name: "Green Apple Milk Tea",
-    price: 89,
     description:
-      "Refreshing green apple milk tea served cold with chewy pearls.",
+      "Refreshing green apple milk tea served cold. Choose your preferred size.",
     image: "/images/green-apple-milk-tea.png",
     category: "Drinks",
-    badge: "New",
+    sizes: milkTeaSizes,
   },
 ]
 
@@ -195,11 +201,12 @@ export function Menu() {
 
           <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">
             Explore our signature rice meals, affordable student
-            combos, snacks, coffee, and refreshing milk tea.
+            combos, snacks, coffee, and milk tea available in several
+            sizes.
           </p>
         </div>
 
-        {/* Category buttons */}
+        {/* Category filters */}
         <div className="mx-auto mb-12 flex max-w-5xl flex-wrap justify-center gap-3">
           {categories.map((category) => {
             const isActive = activeCategory === category
@@ -221,59 +228,123 @@ export function Menu() {
           })}
         </div>
 
-        {/* Menu cards */}
-        <div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleItems.map((item) => (
-            <article
-              key={item.name}
-              className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
-            >
-              {/* Product image */}
-              <div className="relative h-64 overflow-hidden bg-muted">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+        {/* Menu grid */}
+        <div className="mx-auto grid max-w-7xl items-start gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleItems.map((item) => {
+            const hasSizes = Boolean(item.sizes)
+            const isDrink = item.category === "Drinks"
 
-                {/* Price */}
-                <div className="absolute right-4 top-4 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground shadow-lg">
-                  ₱{item.price}
+            return (
+              <article
+                key={item.name}
+                className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
+              >
+                {/* Image area */}
+                <div
+                  className={`relative overflow-hidden ${
+                    hasSizes
+                      ? "h-72 bg-white"
+                      : isDrink
+                        ? "h-64 bg-white"
+                        : "h-64 bg-muted"
+                  }`}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className={
+                      isDrink
+                        ? "object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                        : "object-cover transition-transform duration-500 group-hover:scale-105"
+                    }
+                  />
+
+                  {typeof item.price === "number" && (
+                    <div className="absolute right-4 top-4 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground shadow-lg">
+                      ₱{item.price}
+                    </div>
+                  )}
+
+                  {item.sizes && (
+                    <div className="absolute right-4 top-4 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground shadow-lg">
+                      From ₱{item.sizes[0].price}
+                    </div>
+                  )}
+
+                  {item.badge && (
+                    <div className="absolute left-4 top-4 rounded-full border border-primary/40 bg-background/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary backdrop-blur">
+                      {item.badge}
+                    </div>
+                  )}
                 </div>
 
-                {/* Badge */}
-                {item.badge && (
-                  <div className="absolute left-4 top-4 rounded-full border border-primary/40 bg-background/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary backdrop-blur">
-                    {item.badge}
-                  </div>
-                )}
-              </div>
+                {/* Card content */}
+                <div className="p-6">
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary">
+                    {item.category}
+                  </p>
 
-              {/* Product details */}
-              <div className="p-6">
-                <p className="text-xs uppercase tracking-[0.2em] text-primary">
-                  {item.category}
-                </p>
+                  <h3 className="mt-2 font-serif text-xl font-bold text-foreground transition-colors group-hover:text-primary">
+                    {item.name}
+                  </h3>
 
-                <h3 className="mt-2 font-serif text-xl font-bold text-foreground transition-colors group-hover:text-primary">
-                  {item.name}
-                </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
 
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
+                  {item.sizes && (
+                    <div className="mt-5">
+                      <p className="mb-3 text-sm font-semibold text-foreground">
+                        Size & Price
+                      </p>
 
-                <a
-                  href="tel:09289623913"
-                  className="mt-6 inline-flex w-full items-center justify-center rounded-lg border border-primary px-4 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                >
-                  Order Now
-                </a>
-              </div>
-            </article>
-          ))}
+                      <div className="grid grid-cols-2 gap-2">
+                        {item.sizes.map((option) => (
+                          <div
+                            key={option.size}
+                            className="flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2"
+                          >
+                            <span className="text-sm text-muted-foreground">
+                              {option.size}
+                            </span>
+
+                            <span className="font-bold text-primary">
+                              ₱{option.price}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-4 rounded-lg border border-primary/20 bg-primary/5 p-3">
+                        <p className="text-sm font-semibold text-foreground">
+                          Add-ons
+                        </p>
+
+                        <div className="mt-2 flex flex-wrap gap-2 text-sm text-muted-foreground">
+                          <span className="rounded-full border border-border bg-background px-3 py-1">
+                            Nata +₱10
+                          </span>
+
+                          <span className="rounded-full border border-border bg-background px-3 py-1">
+                            Fruit Jelly +₱10
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <a
+                    href="tel:09289623913"
+                    className="mt-6 inline-flex w-full items-center justify-center rounded-lg border border-primary px-4 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Order Now
+                  </a>
+                </div>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>
