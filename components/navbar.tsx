@@ -93,7 +93,7 @@ export function Navbar() {
           <div className="flex justify-between items-center p-6 border-b border-primary/20">
             <div className="relative w-14 h-14">
               <Image
-                src="/images/Official-Logo.jpeg"
+                src="/public/Favicon.jpeg"
                 alt="Chaopan Corner"
                 fill
                 className="object-contain"
